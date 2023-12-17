@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./style_dialog.scss";
 import cancleIcon from "../../asset/images/home/cancel.svg";
 import Button from "../button";

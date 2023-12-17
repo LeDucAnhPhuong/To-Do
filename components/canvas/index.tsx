@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
 import { useRef, useEffect } from "react";
 type Props = {
   open: number;
