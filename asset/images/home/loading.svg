@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" preserveAspectRatio="xMidYMid" viewBox="0 0 100 100">
+    <circle class='outer' cx="50" cy="50" r="40" fill="none" 
+    stroke="#374a67" 
+    stroke-dasharray="1709.0264035528476 1709.0264035528476" 
+    style="stroke-dashoffset: 512.708;" stroke-linecap="round" 
+    stroke-width="4" />
+</svg>

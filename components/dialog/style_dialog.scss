@@ -1,0 +1,154 @@
+@keyframes show {
+    0% {
+        transform: translateY(-100px) scale(.8);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes hidden {
+    0% {
+        transform: translateY(0px) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100px) scale(.8);
+        opacity: 0;
+    }
+}
+
+@keyframes displayhidden {
+    0% {
+        display: flex;
+    }
+
+    100% {
+        display: none;
+
+    }
+}
+
+
+
+.dialog {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    transition: color 1s ease;
+    z-index: 99;
+    border: 0;
+    box-sizing: border-box;
+    padding-inline: 15px;
+
+    &--display {
+        &-show {
+            display: flex;
+            background-color: #00000066;
+
+        }
+
+        &-hidden {
+            display: none;
+            animation: displayhidden 0.3s ease-out;
+            background-color: transparent;
+
+        }
+    }
+
+    &--animation {
+        &-show {
+            animation: show 0.3s ease-out;
+        }
+
+        &-hidden {
+            animation: hidden 0.3s ease-in;
+        }
+    }
+
+    .tag-name {
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    &__content {
+        background-color: #fff;
+        border-radius: 24px;
+        padding: 40px 60px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        width: 560px;
+        gap: 28px
+    }
+
+    &__tag {
+        display: flex;
+        justify-content: space-between;
+
+        &-name {
+            font-size: 22px;
+            font-weight: 600;
+        }
+    }
+
+
+    &__task-input {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: clamp(370px, 100%, 440px);
+
+        .task__input {
+            padding: 12px 20px;
+            border: 1px solid #D8E0F0;
+            border-radius: 8px;
+
+
+            input {
+                &::placeholder {
+                    color: #91929E;
+                    font-size: 16px;
+                    font-weight: 400;
+
+                }
+
+                width: 100%;
+                outline: 0;
+                border :0
+            }
+        }
+    }
+
+    &__priority {
+        display: flex;
+        gap: 12px;
+        flex-direction: column;
+
+        &-list {
+            display: flex;
+            gap: 12px;
+        }
+    }
+
+    &__action {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    &__delete {
+        font-size: 22px;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 4px;
+    }
+}

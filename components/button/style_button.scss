@@ -1,0 +1,105 @@
+@mixin table {
+    @media only screen and (min-width : $tablet-width ) {
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media only screen and ((min-width : $mobile-width) and (max-width : $tablet-width)) {
+        @content;
+
+    }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+@keyframes effectClick {
+    0% {
+        width: 0px;
+        opacity: .3;
+    }
+
+    100% {
+        width: 300px;
+        opacity: 0;
+    }
+}
+
+.size-big {
+    padding-block: 13px;
+    border-radius: 14px;
+    width: 157px;
+    height: 44px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18.4px;
+}
+
+.size-normal {
+    padding-block: 12px;
+    border-radius: 10px;
+    line-height: 16px;
+    width: 114px;
+}
+
+.size-small {
+    padding-block: 8px;
+    border-radius: 10px;
+    line-height: 20px;
+    width: 120px;
+}
+
+.display-hidden {
+    display: none !important;
+}
+
+.display-show {
+    display: flex !important;
+}
+
+.disable {
+    background-color: #EDEEF0 !important;
+    pointer-events: none;
+}
+
+.components__button {
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    gap: 12px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: transparent;
+    box-sizing: border-box;
+    text-transform: capitalize;
+    overflow: hidden;
+    transition: all 1s ease;
+    user-select: none;
+
+    .button__effect {
+        animation: effectClick 1s 0.1s ease-out 1;
+        animation-fill-mode: none;
+
+    }
+
+    .button__title {
+        pointer-events: none;
+    }
+
+    .list__effect {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+    }
+
+    .button__effect {
+        position: absolute;
+        opacity: .3;
+        z-index: 20;
+        border-radius: 50%;
+        aspect-ratio: 1;
+        transform: translate(-50%, -50%);
+
+    }
+}
