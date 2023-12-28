@@ -159,7 +159,7 @@ const Dialog = ({
                   type={
                     taskInput.priority === "medium" ? "contained" : "outlined"
                   }
-                  color="#0AC947"
+                  color="#FFBD21"
                   title="Medium"
                   value="medium"
                   size="small"
@@ -171,7 +171,7 @@ const Dialog = ({
                 <Button
                   id="low"
                   type={taskInput.priority === "low" ? "contained" : "outlined"}
-                  color="#FFBD21"
+                  color="#0AC947"
                   title="Low"
                   size="small"
                   value="low"

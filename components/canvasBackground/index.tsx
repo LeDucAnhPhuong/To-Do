@@ -10,13 +10,13 @@ let mouse = {
 };
 let timeOut: any;
 const arrayRandomNumber = [-1, 1];
+let canvasArray: any[] = [];
 const arrayColor = ["#D62839", "#BA324F", "#175676", "#4BA3C3", "#CCE6F4"];
 import { useEffect, useRef, useState } from "react";
 const CanvasBackground = ({ width, height }: Props) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [open, setOpen] = useState<boolean>(true);
   function drawCanvas() {
-    let canvasArray: any[] = [];
     const ctx = canvasRef?.current?.getContext("2d");
 
     function createCanvas(this: any) {
@@ -97,6 +97,7 @@ const CanvasBackground = ({ width, height }: Props) => {
       };
     });
     window.addEventListener("resize", () => {
+      canvasArray = [];
       clearTimeout(timeOut);
       setOpen(false);
       setTimeout(() => setOpen(true), 1000);

@@ -1,6 +1,5 @@
 /* eslint-disable no-case-declarations */
 import { useState, useRef, useEffect } from "react";
-import "./App.css";
 import addIcon from "../asset/images/home/add.svg";
 import editIcon from "../asset/images/home/edit.svg";
 import deleteIcon from "../asset/images/home/delete.svg";
@@ -59,7 +58,10 @@ function App() {
         height: window.innerHeight,
       });
     });
-  });
+    window.addEventListener("animationend", (e) => {
+      console.log("e", e);
+    });
+  }, []);
   useEffect(() => {
     listRef.current = listRef.current.filter((e) => e !== null);
   }, [listRef.current.length]);
@@ -138,12 +140,12 @@ function App() {
     setTaskList(array);
   }
   function deleteTask() {
+    const id = taskSelect.id;
     setTimeout(() => {
       let array: Array<TaskList> = [];
-      array = handleEditDeleteTaskList(taskList, taskSelect.id, "delete");
+      array = handleEditDeleteTaskList(taskList, id, "delete");
       setTaskList([...array]);
     }, 500);
-
     animationDeleteTask(taskSelect.id);
   }
   function animationAddNewTask() {
@@ -158,6 +160,7 @@ function App() {
         { transform: "translateY(0px)" },
       ],
       {
+        id: "delete",
         // timing options
         duration: 500,
       }
@@ -197,10 +200,10 @@ function App() {
   }
   return (
     <>
-      <CanvasBackground
+      {/* <CanvasBackground
         width={innerWindow.width - 1}
         height={innerWindow.height - 1}
-      ></CanvasBackground>
+      ></CanvasBackground> */}
       <CanvasFireWorks
         open={openCanvas}
         setOpen={setOpenCanvas}
@@ -217,7 +220,7 @@ function App() {
         name={typeDialog}
         task={taskSelect.isSelect ? taskList[taskSelect.id] : undefined}
       ></Dialog>
-      <section className="home">
+      <section className={"home"}>
         <header className="home-header">
           <h1 className="home-header__title">Task List</h1>
           <Button
@@ -266,7 +269,7 @@ function App() {
                 <button
                   ref={stateRef}
                   onClick={(event: React.MouseEvent) => {
-                    handleState(index, event.clientX, event.clientY - 70);
+                    handleState(index, event.clientX, event.clientY + 30);
                   }}
                   className="task-list__item-state button button--color-gray text--transform-first-letter"
                 >
