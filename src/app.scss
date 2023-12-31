@@ -259,34 +259,21 @@ body {
                     background-color: #EDEEF0;
                     color :#7D8592;
 
-                    .translate-0 {
-                        animation: translate 0.5s ease-out;
-                        transform: translateY(0);
-                    }
-
-                    .translate-25 {
-                        transform: translateY(-25%);
-                        transition: transform 0.5s ease-out;
-                    }
-
-                    .translate-50 {
-                        transform: translateY(-50%);
-                        transition: transform 0.5s ease-out;
-                    }
-
-                    .translate-75 {
-                        transform: translateY(-75%);
-                        transition: transform 0.5s ease-out;
-                        top: 0
-                    }
 
                     .state__list {
                         display: flex;
                         flex-direction: column;
                         justify-content: space-between;
-                        min-height: 400%;
+                        height: 400%;
                         position: absolute;
-                        padding-block: 8px;
+
+                        @include table() {
+                            padding-block: 8px;
+                        }
+                        @include mobile() {
+                            padding-block: 7px;
+                        }
+
                         top: 0;
                         box-sizing: border-box;
 

@@ -86,7 +86,7 @@
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
-        width: 560px;
+        width: clamp(360px, 90%, 560px);
         gap: 28px
     }
 
@@ -105,7 +105,7 @@
         display: flex;
         flex-direction: column;
         gap: 8px;
-        width: clamp(370px, 100%, 440px);
+        width: 100%;
 
         .task__input {
             padding: 12px 20px;

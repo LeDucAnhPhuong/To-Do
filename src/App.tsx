@@ -26,7 +26,7 @@ type TaskSelect = {
 function App() {
   const S = 2 * Math.PI * 24;
   const listRef = useRef<Array<HTMLLIElement>>([]);
-  const stateRef = useRef<HTMLButtonElement>(null);
+  const stateRef = useRef<Array<HTMLUListElement>>([]);
   const ulRef = useRef<HTMLUListElement>(null);
   const containerRef = useRef<HTMLDivElement | null>();
   const [taskSelect, setTaskSelect] = useState<TaskSelect>({
@@ -58,15 +58,27 @@ function App() {
         height: window.innerHeight,
       });
     });
-    window.addEventListener("animationend", (e) => {
-      console.log("e", e);
-    });
   }, []);
   useEffect(() => {
     listRef.current = listRef.current.filter((e) => e !== null);
   }, [listRef.current.length]);
   useEffect(() => {
     localStorage.setItem("taskList", JSON.stringify(taskList));
+    stateRef?.current?.map((ul: HTMLUListElement, index: number) => {
+      ul?.addEventListener("transitionend", () => {
+        const currentTask = taskList[index];
+        if (currentTask.state === 3) {
+          ul.style.transition = "none";
+          ul.style.transform = "translateY(0)";
+          const array = handleEditDeleteTaskList(taskList, index, "edit", {
+            ...taskList[index],
+            state: 0,
+            angle: 0,
+          });
+          setTaskList([...array]);
+        }
+      });
+    });
   }, [taskList]);
   function handleDialog(type: string | undefined) {
     setOpen(true);
@@ -103,6 +115,7 @@ function App() {
           state: 1,
           angle: 180,
         });
+        setTaskList([...array]);
         break;
       case 1:
         array = handleEditDeleteTaskList(taskList, position, "edit", {
@@ -112,17 +125,17 @@ function App() {
         });
         setPosition({ x: x, y: y });
         setOpenCanvas(openCanvas + 1);
+        setTaskList([...array]);
         break;
       case 2:
         array = handleEditDeleteTaskList(taskList, position, "edit", {
           ...taskList[position],
-          state: 0,
+          state: 3,
           angle: 0,
         });
-
+        setTaskList([...array]);
         break;
     }
-    setTaskList([...array]);
   }
   function addNewTask(task: taskInDialog) {
     setTaskList([
@@ -200,10 +213,6 @@ function App() {
   }
   return (
     <>
-      {/* <CanvasBackground
-        width={innerWindow.width - 1}
-        height={innerWindow.height - 1}
-      ></CanvasBackground> */}
       <CanvasFireWorks
         open={openCanvas}
         setOpen={setOpenCanvas}
@@ -267,13 +276,31 @@ function App() {
                   </p>
                 </div>
                 <button
-                  ref={stateRef}
                   onClick={(event: React.MouseEvent) => {
                     handleState(index, event.clientX, event.clientY + 30);
+                    stateRef?.current?.map(
+                      (ul: HTMLUListElement, index: number) => {
+                        ul?.addEventListener("click", () => {
+                          const currentTask = taskList[index];
+                          if (currentTask.state !== 3) {
+                            ul.style.transition = "transform 0.5s ease-out";
+                          }
+                        });
+                      }
+                    );
                   }}
                   className="task-list__item-state button button--color-gray text--transform-first-letter"
                 >
-                  <ul className={`state__list translate-${task.state * 25}`}>
+                  <ul
+                    ref={(el: HTMLUListElement) =>
+                      (stateRef.current[index] = el)
+                    }
+                    className={`state__list`}
+                    style={{
+                      transform: `translateY(-${task.state * 25}%)`,
+                      transition: "transform 0.5s ease-out",
+                    }}
+                  >
                     <li className="state__list-item">To do</li>
                     <li className="state__list-item">In Progress</li>
                     <li className="state__list-item">Done</li>
